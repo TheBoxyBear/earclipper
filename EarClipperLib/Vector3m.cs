@@ -122,12 +122,7 @@ namespace EarClipperLib
         {
             var dot = Dot(a);
             var len = Length() * a.Length();
-            if (len == 0)
-            {
-                return 0;
-            }
-
-            return System.Math.Acos(dot.ToDouble() / len);
+            return len == 0 ? 0 : Math.Acos(dot.ToDouble() / len);
         }
 
         public Vector3m ShortenByLargestComponent()
@@ -135,15 +130,10 @@ namespace EarClipperLib
             if (this.LengthSquared().IsZero)
                 return new Vector3m(0, 0, 0);
             var absNormal = Absolute();
-            ERational largestValue = 0;
+            ERational largestValue;
             if (absNormal.X.CompareTo(absNormal.Y) >= 0 && absNormal.X.CompareTo(absNormal.Z) >= 0)
                 largestValue = absNormal.X;
-            else if (absNormal.Y.CompareTo(absNormal.X) >= 0 && absNormal.Y.CompareTo(absNormal.Z) >= 0)
-                largestValue = absNormal.Y;
-            else
-            {
-                largestValue = absNormal.Z;
-            }
+            else largestValue = absNormal.Y.CompareTo(absNormal.X) >= 0 && absNormal.Y.CompareTo(absNormal.Z) >= 0 ? absNormal.Y : absNormal.Z;
 
             Debug.Assert(!largestValue.IsZero);
             return this / largestValue;
@@ -165,14 +155,7 @@ namespace EarClipperLib
 
         public override bool Equals(object obj)
         {
-            var other = obj as Vector3m;
-
-            if (other == null)
-            {
-                return false;
-            }
-
-            return X.CompareTo(other.X) == 0 && Y.CompareTo(other.Y) == 0 && Z.CompareTo(other.Z) == 0;
+            return obj is Vector3m other && X.CompareTo(other.X) == 0 && Y.CompareTo(other.Y) == 0 && Z.CompareTo(other.Z) == 0;
         }
 
         public override int GetHashCode()
@@ -228,17 +211,11 @@ namespace EarClipperLib
     {
         public bool Equals(Vector3m x, Vector3m y)
         {
-            if (x == null && y == null)
-            {
-                return true;
-            }
+            bool
+                xNull = x is null,
+                yNull = y is null;
 
-            if (x == null || y == null)
-            {
-                return false;
-            }
-
-            return x.SameExactDirection(y);
+            return xNull == yNull && (x?.SameExactDirection(y) ?? true);
         }
 
         public int GetHashCode(Vector3m obj)

@@ -52,9 +52,9 @@ namespace EarClipperTest
             earClipping.Triangulate();
             res = earClipping.Result;
             PrintTriangles(res);
-            
-            
-            //Example 5 
+
+
+            //Example 5
             // non coplanar polygon that gets its points mapped to a coplanar space
             points = new List<Vector3m>()
             {
@@ -71,39 +71,39 @@ namespace EarClipperTest
                 new Vector3m(7103, -145, -6115),
                 new Vector3m(7103, -131, -6115)
             };
-            points = EarClipping.GetCoplanarMapping(points, out var reverseMapping);
-            earClipping = new EarClipping();
-            earClipping.SetPoints(points);
-            earClipping.Triangulate();
-            res = earClipping.Result;
-            res = EarClipping.RevertCoplanarityMapping(res, reverseMapping);
-            PrintTriangles(res);
+            //points = EarClipping.GetCoplanarMapping(points, out var reverseMapping);
+            //earClipping = new EarClipping();
+            //earClipping.SetPoints(points);
+            //earClipping.Triangulate();
+            //res = earClipping.Result;
+            //res = EarClipping.RevertCoplanarityMapping(res, reverseMapping);
+            //PrintTriangles(res);
 
-            //Example 6 
-            points = new List<Vector3m>()
-            {
-                new Vector3m(0, 0, 0),
-                new Vector3m(8, 0, 0),
-                new Vector3m(8, 4, 0),
-                new Vector3m(0, 4, 0)
-            };
+            ////Example 6
+            //points = new List<Vector3m>()
+            //{
+            //    new Vector3m(0, 0, 0),
+            //    new Vector3m(8, 0, 0),
+            //    new Vector3m(8, 4, 0),
+            //    new Vector3m(0, 4, 0)
+            //};
 
-            // specify holes in CW order
-            holes = new List<List<Vector3m>>();
-            Vector3m[] hole2 =
-            {
-                new Vector3m(7, 2, 0),
-                new Vector3m(6, 1, 0),
-                new Vector3m(4, 2, 0),
-                new Vector3m(5, 3, 0),
-            };
-            holes.Add(hole2.ToList());
+            //// specify holes in CW order
+            //holes = new List<List<Vector3m>>();
+            //Vector3m[] hole2 =
+            //{
+            //    new Vector3m(7, 2, 0),
+            //    new Vector3m(6, 1, 0),
+            //    new Vector3m(4, 2, 0),
+            //    new Vector3m(5, 3, 0),
+            //};
+            //holes.Add(hole2.ToList());
 
-            earClipping = new EarClipping();
-            earClipping.SetPoints(points, holes);
-            earClipping.Triangulate();
-            res = earClipping.Result;
-            PrintTriangles(res);
+            //earClipping = new EarClipping();
+            //earClipping.SetPoints(points, holes);
+            //earClipping.Triangulate();
+            //res = earClipping.Result;
+            //PrintTriangles(res);
 
             Console.ReadKey();
         }

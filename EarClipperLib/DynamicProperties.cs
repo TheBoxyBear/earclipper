@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EarClipperLib
 {
@@ -23,9 +20,7 @@ namespace EarClipperLib
 
         internal bool ExistsKey(PropertyConstants key)
         {
-            if (_properties.ContainsKey(key))
-                return true;
-            return false;
+            return _properties.ContainsKey(key);
         }
 
         internal object GetValue(PropertyConstants key)
